@@ -1,7 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
+import Calculator from './tools/calculator.controller';
 import Tool from '../database/models/tools.model';
 
 export class Tools {
+  public calculator: Calculator = new Calculator();
   // Получить инструменты
   public async getTools (req: Request, res: Response) {
     try {

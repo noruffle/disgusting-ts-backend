@@ -57,4 +57,4 @@ schema.virtual("url").get(function () {
   return `/catalog/anime/${this._id}`;
 });
 
-export const Anime = mongoose.model("Anime", schema);
+export const animeSchema = mongoose.model("animeSchema", schema);

@@ -1,8 +1,7 @@
 import app from './app';
-import {port} from './config';
 
-app.listen(port , () => {
+app.listen(3000, () => {
   console.log(
-    `\nStarted on http://localhost:${port}\nUse Ctrl + C to end proccess`
+    `\nStarted on http://localhost:3000\nUse Ctrl + C to end proccess`
   )
 })

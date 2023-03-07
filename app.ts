@@ -1,17 +1,17 @@
-import { download } from './routes/route/download.route';
+/* import { download } from './routes/route/download.route';
 import { basic } from './routes/route/basic.route';
 import { error } from './routes/route/error.route';
 import { tools } from './routes/route/tools.route';
 import { users } from './routes/route/users.route';
 import { api } from './routes/route/api.route';
-
+ */
 import BodyParser from 'body-parser';
 import mongoose from "mongoose";
 import express from "express";
 import * as dotenv from 'dotenv';
 import {Routes} from './routes/route';
 
-const db: any = process.env.DATABASE;
+//const db: any = process.env.DATABASE;
 
 // const app = express();
 
@@ -36,22 +36,23 @@ class App {
     this.app = express();
     this.config();
     dotenv.config();
-    this.ConnectDB();
+    // this.ConnectDB();
     this.route.routes(this.app)
   }
 
   private config(): void {
     //  Static
+    this.app.set("view engine", "ejs");
     this.app.use(express.static(__dirname + "/public"));
     this.app.use(express.urlencoded({extended: true}));
     this.app.use(express.json());
   }
 
-  private ConnectDB(): void {
+  /* private ConnectDB(): void {
     mongoose.Promise = global.Promise;
-    mongoose.connect(db);
+    mongoose.connect(process.env.DATABASE);
 
-  }
+  } */
 }
 
 export default new App().app;

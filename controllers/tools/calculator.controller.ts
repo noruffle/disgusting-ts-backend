@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-
-export class Calculator {
+export default class Calculator {
   // Получить калькулятор
   public async getCalculator(req: Request, res: Response) {
     try {
@@ -39,3 +38,4 @@ export class Calculator {
     }
   }
 }
+
