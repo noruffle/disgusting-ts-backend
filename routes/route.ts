@@ -1,30 +1,58 @@
-import express from "express";
-import { Tools } from "../controllers/tools.controller";
-import { Home } from '../controllers/home.controller';
-import Anime from '../controllers/anime/anime.controller';
-//import Manga from '../controllers/manga/manga.controller';
+import { Application } from 'express';
+import Pathes from './path';
 
 export class Routes {
-  public toolsController: Tools = new Tools();
-  public homeController: Home = new Home();
-  public animeController: Anime = new Anime();
+  public path: Pathes = new Pathes();
 
-  public routes(app: express.Application): void {
+  public routes(app: Application): void {
     app.route('/')
-      .get(this.homeController.getHome)
+      .get(this.path.homeController.getHome)
+
+    // APIs
+    app.route('/api')
+      .get(this.path.APIsController.getAPI)
 
     // Anime corner
     app.route('/anime')
-      .get(this.animeController.getAnime)
-      .post(this.animeController.postAnime)
+      .get(this.path.animeController.getAnime)
+      .post(this.path.animeController.postAnime)
+
+    app.route('/anime/watch')
+      .get(this.path.animeController.watchAnime.getWatch)
+
+    // Manga corner
+    app.route('/manga')
+      .get(this.path.mangaController.getManga)
+      .post(this.path.mangaController.postManga)
+
+    app.route('/manga/read')
+      .get(this.path.mangaController.readManga.getRead)
     
     // Tools corner
     app.route('/tools')
-      .get(this.toolsController.getTool)
-      .post(this.toolsController.postTool)
+      .get(this.path.toolsController.getTool)
+      .post(this.path.toolsController.postTool)
 
-    app.route('/calc')
-      .get(this.toolsController.calculator.getCalculator)
-      .post(this.toolsController.calculator.postCalculator)
+    app.route('/tools/calc')
+      .get(this.path.toolsController.calculator.getCalculator)
+      .post(this.path.toolsController.calculator.postCalculator)
+
+    // Users
+    app.route('/users')
+      .get(this.path.usersController.getUsers)
+
+    app.route('/users/:id')
+      .get(this.path.usersController.UserByID.getUser)
+      .post(this.path.usersController.UserByID.postUser)
+      .patch(this.path.usersController.UserByID.patchUser)
+      .delete(this.path.usersController.UserByID.deleteUser)
+
+    // Downloads
+    app.route('/downloads')
+      .get(this.path.downloadsController.getDownloads)
+
+    // Errors
+    app.use(this.path.errorsController[404])
+    app.use(this.path.errorsController[500])
   }
 }

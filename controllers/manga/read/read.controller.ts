@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 
-export class Home {
-  // Стартовая страница
-  public async getHome(req: Request, res: Response) {
+export default class Read {
+  // Страница для чтения манги
+  public async getRead(req: Request, res: Response) {
     try {
-      res.render('home', {
+      res.render('con-read', {
         title: process.env.TITLE,
       })
     } catch (err) {

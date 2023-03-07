@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import Tool from '../database/models/tools.model';
 
-export class Home {
+export default class Home {
   // Стартовая страница
   public async getHome(req: Request, res: Response) {
     try {

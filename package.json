@@ -4,8 +4,8 @@
   "description": "Server based on TypeScript",
   "main": "app.ts",
   "scripts": {
-    "start": "node app",
-    "dev": "nodemon app"
+    "start": "node app.start",
+    "dev": "nodemon app.start"
   },
   "author": "noruffle",
   "dependencies": {

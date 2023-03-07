@@ -1,6 +1,22 @@
 import { Request, Response, NextFunction } from "express";
 
-export const Controller = {
+export default class APIs {
+  // Страница для просмотра аниме
+  public async getAPI(req: Request, res: Response) {
+    try {
+      res.send({
+        message: 'API route was successful'
+      })
+    } catch (err) {
+      res.send({
+        message: 'Error',
+        error: `${err}`
+      })
+    }
+  }
+}
+
+const Controller = {
   ["/api"]: {
     get: {
       method: "GET",
