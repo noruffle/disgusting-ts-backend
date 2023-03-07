@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { Anime } from "../models/anime.model";
+import { Anime } from "../database/models/anime.model";
 import { config } from "../config";
 
 export const Controller = {

@@ -1,18 +1,24 @@
-import { Request, Response } from "express";
-import { Auth } from '../controllers/auth/auth.controller';
+import express, { Request, Response } from "express";
+import { Tools } from "../controllers/tools.controller";
+import { Calculator } from "../controllers/tools/calculator.controller";
+import { Home } from '../controllers/home.controller';
 
 export class Routes {
-  public authController: Auth = new Auth();
+  public toolsController: Tools = new Tools();
+  public calcController: Calculator = new Calculator();
+  public homeController: Home = new Home();
 
-  public routes(app: any): void {
+  public routes(app: express.Application): void {
     app.route('/')
-      .get((req: Request, res: Response) => {
-        res.send({
-          message: 'GET request seccessful'
-        })
-      })
+      .get(this.homeController.getHome)
     
-    app.route('/login').post(this.authController.login)
-    app.route('/registration').post(this.authController.registration)
+    // Tools corner
+    app.route('/tools')
+      .get(this.toolsController.getTool)
+      .post(this.toolsController.postTool)
+
+    app.route('/calc')
+      .get(this.calcController.getCalculator)
+      .post(this.calcController.postCalculator)
   }
 }
