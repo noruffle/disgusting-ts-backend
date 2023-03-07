@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { Anime } from "../database/models/anime.model";
-import { config } from "../config";
+import { animeSchema } from "../../database/models/anime.model";
 
 export const Controller = {
   ["/"]: {
@@ -9,7 +8,7 @@ export const Controller = {
       path: "/",
       callback: (req: Request, res: Response, next: NextFunction) => {
         res.render("home", {
-          title: config.title + "Home",
+          title: process.env.TITLE,
         });
       },
     },
@@ -47,7 +46,7 @@ export const Controller = {
       path: "/anime",
       callback: (req: Request, res: Response, next: NextFunction) => {
         res.render("con-anime", {
-          title: config.title + "Anime",
+          title: process.env.TITLE,
         });
       },
     },
@@ -72,7 +71,7 @@ export const Controller = {
           },
         };
 
-        const add = new Anime({ data });
+        const add = new animeSchema({ data });
       },
     },
 
@@ -101,7 +100,7 @@ export const Controller = {
       path: "/anime/watch",
       callback: (req: Request, res: Response, next: NextFunction) => {
         res.render("con-watch", {
-          title: config.title + "Watching anime",
+          title: process.env.TITLE,
         });
       },
     },
@@ -137,7 +136,7 @@ export const Controller = {
       path: "/manga",
       callback: (req: Request, res: Response, next: NextFunction) => {
         res.render("con-manga", {
-          title: config.title + "Manga",
+          title: process.env.TITLE,
         });
       },
     },
@@ -173,7 +172,7 @@ export const Controller = {
       path: "/manga/read",
       callback: (req: Request, res: Response, next: NextFunction) => {
         res.render("con-read", {
-          title: config.title + "Reading manga",
+          title: process.env.TITLE,
         });
       },
     },

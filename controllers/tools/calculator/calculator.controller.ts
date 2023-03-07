@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
+import { calculator } from '../../../middleware/api/api-calc';
 
-
-export class Calculator {
+export default class Calculator {
   // Получить калькулятор
   public async getCalculator(req: Request, res: Response) {
     try {
@@ -15,27 +15,30 @@ export class Calculator {
       })
     }
   }
+  
   // Отправить данные калькулятора для обработки
   public async postCalculator(req: Request, res: Response) {
     try {
-      const num1 = Number(req.body.num1)
-        const num2 = Number(req.body.num2)
-        console.log(`First operand: ${num1}\nSecond operand: ${num2}`)
-      
-        function calculator(...operands: any) {
-          return operands.reduce((a: any, b: any) => a + b, 0);
-        }
-      
-        let result = calculator(num1, num2)
-        console.log(`Result: ${result}`)
-      
-        res.write(`\nResult: ${result}`)
-        res.send()
+      const num1: Number = Number(req.body.num1)
+      const num2: Number = Number(req.body.num2)
+      console.log(`First operand: ${num1}\nSecond operand: ${num2}`)
+    
+      let result = calculator(num1, num2)
+
+      res.send({
+        operand_1: num1,
+        operand_2: num2,
+        message: 'Operation was seccessful',
+        result: `${result}`
+      })
+
     } catch (err) {
       res.send({
-        message: 'postCalculator error',
+        message: 'Operation was failed',
+        reason: 'postCalculator error',
         error: `${err}`
       })
     }
   }
 }
+

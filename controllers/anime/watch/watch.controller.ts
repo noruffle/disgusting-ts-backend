@@ -1,11 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
-import Tool from '../database/models/tools.model';
 
-export default class Home {
-  // Стартовая страница
-  public async getHome(req: Request, res: Response) {
+export default class Watch {
+  // Страница для просмотра аниме
+  public async getWatch(req: Request, res: Response) {
     try {
-      res.render('home', {
+      res.render('con-watch', {
         title: process.env.TITLE,
       })
     } catch (err) {
