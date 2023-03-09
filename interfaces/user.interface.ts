@@ -1,17 +1,5 @@
-export interface User {
-  name: {
-    type: String,
-    required: true
-  },
-
-  nickname: {
-    type: String,
-    required: true,
-  },
-  
-  dob: {
-    type: Date,
-    required: true
-  }
-
+export default interface userInterface {
+  name: String,
+  nickname: String,
+  dob: Date
 }
