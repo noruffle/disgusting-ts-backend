@@ -7,15 +7,10 @@ const userSchema = new mongoose.Schema<userInterface>({
     required: true
   },
 
-  nickname: {
+  role: {
     type: String,
     required: true,
   },
-  
-  dob: {
-    type: Date,
-    required: true
-  }
 })
 
 export default mongoose.model('User', userSchema);

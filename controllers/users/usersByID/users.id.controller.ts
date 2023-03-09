@@ -15,22 +15,23 @@ export default class UserID {
 
   public async postUser(req: Request, res: Response) {
     try {
-      const newUser = new User({
+
+      const data = new User({
         name: req.body.name,
-        nickname: req.body.nickname,
-        dob: req.body.dob
+        role: req.body.role,
       });
 
-      const uID = uuidv4();
-      const newUsers = {...newUser, id: uID};
-      users.push(newUsers);
+      const dataSaved = await data.save();
+
+      // const uID = uuidv4();
+      // const newUsers = {...newUser, id: uID};
+      // users.push(newUsers);
 
       res.send({
         message: `Added new user`,
         user: {
-          name: `${newUsers.name}`,
-          nickname: `${newUsers.nickname}`,
-          dob: `${newUsers.dob}`
+          name: `${data.name}`,
+          role: `${data.role}`,
         }
       })
 

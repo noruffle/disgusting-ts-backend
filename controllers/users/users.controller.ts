@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import User from '../../database/models/user.model';
 import UserID from './usersByID/users.id.controller';
 
 export default class Users {
@@ -6,9 +7,8 @@ export default class Users {
 
   public async getUsers(req: Request, res: Response) {
     try {
-      res.send({
-        message: 'Seccess'
-      })
+      const data = await User.find({});
+      res.send(data)
     } catch (err) {
       res.send({
         message: 'Error',
