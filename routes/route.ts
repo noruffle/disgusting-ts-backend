@@ -1,10 +1,12 @@
 import { Application } from 'express';
 import Pathes from './path';
 
-export class Routes {
+export default class Routes {
+
   public path: Pathes = new Pathes();
 
   public routes(app: Application): void {
+    
     app.route('/')
       .get(this.path.homeController.getHome)
 

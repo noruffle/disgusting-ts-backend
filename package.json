@@ -9,6 +9,7 @@
   },
   "author": "noruffle",
   "dependencies": {
+    "@typegoose/typegoose": "^10.3.0",
     "body-parser": "^1.20.2",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
