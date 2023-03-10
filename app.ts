@@ -14,7 +14,7 @@ class App {
   
   private config (): void {
     
-    this.app.prototype.routes
+    this.app
     .set("view engine", "ejs")
     .use(express.static(__dirname + "/public"))
     .use(express.urlencoded({extended: true}))
