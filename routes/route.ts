@@ -1,9 +1,9 @@
 import { Application } from 'express';
 import Pathes from './path';
 
-export default class Routes {
+export default class Router {
 
-  public path: Pathes = new Pathes();
+  private path = new Pathes();
 
   public routes(app: Application): void {
     
