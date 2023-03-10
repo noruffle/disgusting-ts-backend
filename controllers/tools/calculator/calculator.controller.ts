@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { calculator } from '../../../middleware/api/api-calc';
+import {api} from '../../../middleware/api/api';
 
 export default class Calculator {
   // Получить калькулятор
@@ -23,7 +23,7 @@ export default class Calculator {
       const num2: Number = Number(req.body.num2)
       console.log(`First operand: ${num1}\nSecond operand: ${num2}`)
     
-      let result = calculator(num1, num2)
+      let result = api.calculator(num1, num2)
 
       res.send({
         operand_1: num1,

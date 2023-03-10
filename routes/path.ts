@@ -8,12 +8,12 @@ import Errors from '../controllers/errors/error.controller';
 import Downloads from '../controllers/download/download.controller';
 
 export default class Pathes {
-  public homeController: Home = new Home();
-  public APIsController: APIs = new APIs();
-  public animeController: Anime = new Anime();
-  public mangaController: Manga = new Manga();
-  public toolsController: Tools = new Tools();
-  public usersController: Users = new Users();
-  public errorsController: Errors = new Errors();
-  public downloadsController: Downloads = new Downloads();
+  public homeController = new Home();
+  public APIsController = new APIs();
+  public animeController = new Anime();
+  public mangaController = new Manga();
+  public toolsController = new Tools();
+  public usersController = new Users();
+  public errorsController = new Errors();
+  public downloadsController = new Downloads();
 }

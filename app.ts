@@ -1,27 +1,27 @@
-import express from "express";
-import Routes from './routes/route';
 import Database from './database/connect.db';
+import Router from './routes/route';
+import express from "express";
 
 class App {
 
   public app: express.Application;
-  public route: Routes = new Routes;
-  public database: Database = new Database;
 
-  constructor() {
+  constructor () {
+
     this.app = express();
     this.config();
-    // auth
-    this.route.routes(this.app)
-    this.database;
   }
   
-  private config(): void {
+  private config (): void {
     
-    this.app.set("view engine", "ejs");
-    this.app.use(express.static(__dirname + "/public"));
-    this.app.use(express.urlencoded({extended: true}));
-    this.app.use(express.json());
+    this.app.prototype.routes
+    .set("view engine", "ejs")
+    .use(express.static(__dirname + "/public"))
+    .use(express.urlencoded({extended: true}))
+    .use(express.json())
+    
+    new Router().routes(this.app)
+    new Database()
   }
 }
 
