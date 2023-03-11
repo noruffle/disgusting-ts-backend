@@ -21,7 +21,7 @@ class App {
     .use(express.json())
     
     new Router().routes(this.app)
-    new Database()
+    // new Database()
   }
 }
 
