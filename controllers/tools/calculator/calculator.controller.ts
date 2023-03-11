@@ -21,7 +21,10 @@ export default class Calculator {
     try {
       const num1: Number = Number(req.body.num1)
       const num2: Number = Number(req.body.num2)
+      const date: string = req.body.dob
       console.log(`First operand: ${num1}\nSecond operand: ${num2}`)
+      
+      const age: number = api.Birthday(date)
     
       let result = api.calculator(num1, num2)
 
@@ -29,7 +32,10 @@ export default class Calculator {
         operand_1: num1,
         operand_2: num2,
         message: 'Operation was seccessful',
-        result: `${result}`
+        result: `${result}`,
+        dob: `${date}`,
+        age: age
+
       })
 
     } catch (err) {

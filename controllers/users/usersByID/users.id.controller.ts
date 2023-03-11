@@ -1,13 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import User from '../../../database/models/user.model';
-const { v4: uuidv4 } = require("uuid");
-let users: Array<any> = [];
 
 export default class UserID {
   public async getUser(req: Request, res: Response) {
     const {id} = req.params;
-    const foundUser = users.find(
-      (user) => user.id === id
+    const foundUser: any = User.find(
+      (user: any) => user.id === id
     )
     
     res.send([foundUser]);
@@ -17,21 +15,19 @@ export default class UserID {
     try {
 
       const data = new User({
-        name: req.body.name,
-        role: req.body.role,
+        important: {
+          email: req.body.email,
+          password: req.body.password
+        }
       });
 
-      const dataSaved = await data.save();
-
-      // const uID = uuidv4();
-      // const newUsers = {...newUser, id: uID};
-      // users.push(newUsers);
+      const registered = await data.save();
 
       res.send({
         message: `Added new user`,
         user: {
-          name: `${data.name}`,
-          role: `${data.role}`,
+          name: `${data.important.email}`,
+          role: `${data.important.password}`,
         }
       })
 
@@ -46,14 +42,14 @@ export default class UserID {
   public async patchUser (req: Request, res: Response) {
     try {  
       const {id} = req.params;
-      const foundUser = users.find(
-        (user) => user.id === id
+      const foundUser = User.find(
+        (user: any) => user.id === id
       )
       
       const { name, age } = req.body;
       if (name && age) {
-        foundUser.name = name
-        foundUser.age = age
+        //foundUser. = name
+        //foundUser.age = age                            !!!!!
 
         res.send({
           message: `User with ${id} was updated`,
@@ -71,9 +67,9 @@ export default class UserID {
 
   public async deleteUser (req: Request, res: Response) {
     const {id} = req.params;
-    users = users.filter(
-      (user) => user.id !== id
-    )
+    // const users = User.filter(
+    //   (user: any) => user.id !== id
+    // )
 
     res.send({
       message: `User with ${id} was deleted succeessfuly`
