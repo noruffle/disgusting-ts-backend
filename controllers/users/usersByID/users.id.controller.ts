@@ -1,8 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
+import { RequestHandler } from 'express';
 import User from '../../../database/models/user.model';
 
 export default class UserID {
-  public async getUser(req: Request, res: Response) {
+  public getUser: RequestHandler = async (req, res) => {
     const {id} = req.params;
     const foundUser: any = User.find(
       (user: any) => user.id === id
@@ -11,7 +11,7 @@ export default class UserID {
     res.send([foundUser]);
   }
 
-  public async postUser(req: Request, res: Response) {
+  public postUser: RequestHandler = async (req, res) => {
     try {
 
       const data = new User({
@@ -21,15 +21,6 @@ export default class UserID {
         }
       });
 
-      const registered = await data.save();
-
-      res.send({
-        message: `Added new user`,
-        user: {
-          name: `${data.important.email}`,
-          role: `${data.important.password}`,
-        }
-      })
 
     } catch (err) {
       res.send({
@@ -39,7 +30,7 @@ export default class UserID {
     }
   }
 
-  public async patchUser (req: Request, res: Response) {
+  public patchUser: RequestHandler = async (req, res) => {
     try {  
       const {id} = req.params;
       const foundUser = User.find(
@@ -65,7 +56,7 @@ export default class UserID {
     }
   }
 
-  public async deleteUser (req: Request, res: Response) {
+  public deleteUser: RequestHandler = async (req, res) => {
     const {id} = req.params;
     // const users = User.filter(
     //   (user: any) => user.id !== id
