@@ -5,11 +5,9 @@ import {Cat, CatsService} from '../../../database/test/schemas/cat.schema';
 export default class UserID {
   public getUser: RequestHandler = async (req, res) => {
     const {id} = req.params;
-    const foundUser: any = User.find(
-      (user: any) => user.id === id
-    )
+    const cat = await new CatsService().findOne(id)
     
-    res.send([foundUser]);
+    res.send([cat]);
   }
 
   public postUser: RequestHandler = async (req, res) => {
