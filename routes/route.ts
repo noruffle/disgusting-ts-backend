@@ -42,10 +42,10 @@ export default class Router {
     // Users
     app.route('/users')
       .get(this.path.usersController.getUsers)
+      .post(this.path.usersController.UserByID.postUser)
 
     app.route('/users/:id')
       .get(this.path.usersController.UserByID.getUser)
-      .post(this.path.usersController.UserByID.postUser)
       .patch(this.path.usersController.UserByID.patchUser)
       .delete(this.path.usersController.UserByID.deleteUser)
 

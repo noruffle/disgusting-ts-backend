@@ -1,5 +1,6 @@
 import { RequestHandler } from 'express';
 import User from '../../../database/models/user.model';
+import {Cat, CatsService} from '../../../database/test/schemas/cat.schema';
 
 export default class UserID {
   public getUser: RequestHandler = async (req, res) => {
@@ -14,6 +15,14 @@ export default class UserID {
   public postUser: RequestHandler = async (req, res) => {
     try {
 
+      const cat = await new CatsService().create(req)
+      cat.save()
+      
+      console.log(
+        cat.name
+
+      )
+
       const data = new User({
         important: {
           email: req.body.email,
@@ -21,7 +30,7 @@ export default class UserID {
         }
       });
 
-
+      res.redirect('home')
     } catch (err) {
       res.send({
         message: 'Error',
@@ -33,24 +42,12 @@ export default class UserID {
   public patchUser: RequestHandler = async (req, res) => {
     try {  
       const {id} = req.params;
-      const foundUser = User.find(
-        (user: any) => user.id === id
-      )
+      const {name, age} = req.body
+      const update = {name, age}
+      const cat = await Cat.findByIdAndUpdate(id, update)
       
-      const { name, age } = req.body;
-      if (name && age) {
-        //foundUser. = name
-        //foundUser.age = age                            !!!!!
-
-        res.send({
-          message: `User with ${id} was updated`,
-          update: {
-            name: name,
-            age: age
-          }
-        })
-      }
-
+      res.send({message: `User with ${id} was updated`})
+      
     } catch (err) {
       res.send(err)
     }
@@ -58,9 +55,8 @@ export default class UserID {
 
   public deleteUser: RequestHandler = async (req, res) => {
     const {id} = req.params;
-    // const users = User.filter(
-    //   (user: any) => user.id !== id
-    // )
+    
+    await new CatsService().delete(id)
 
     res.send({
       message: `User with ${id} was deleted succeessfuly`
