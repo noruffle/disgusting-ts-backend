@@ -6,6 +6,6 @@ const userSchema = new mongoose.Schema({
     password: {type: String, required: true, select: false},
 })
 
-type User = InferSchemaType<typeof userSchema>
+export type typeUser = InferSchemaType<typeof userSchema>
 
-export default model<User>("User", userSchema)
+export default model<typeUser>("User", userSchema)
