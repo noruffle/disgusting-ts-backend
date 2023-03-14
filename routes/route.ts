@@ -24,7 +24,7 @@ export default class Router {
 
     // Manga corner
     app.route('/manga')
-      .get(this.path.mangaController.getManga)
+      .get(this.path.mangaController.allManga)
       .post(this.path.mangaController.postManga)
 
     app.route('/manga/read')
@@ -39,15 +39,15 @@ export default class Router {
       .get(this.path.toolsController.calculator.getCalculator)
       .post(this.path.toolsController.calculator.postCalculator)
 
-    // Users
-    app.route('/users')
-      .get(this.path.usersController.getUsers)
-      .post(this.path.usersController.UserByID.postUser)
+    // Cats
+    app.route('/cats')
+      .get(this.path.catsController.getCats)
+      .post(this.path.catsController.catById.postCat)
 
-    app.route('/users/:id')
-      .get(this.path.usersController.UserByID.getUser)
-      .patch(this.path.usersController.UserByID.patchUser)
-      .delete(this.path.usersController.UserByID.deleteUser)
+    app.route('/cats/:id')
+      .get(this.path.catsController.catById.getCat)
+      .patch(this.path.catsController.catById.patchCat)
+      .delete(this.path.catsController.catById.deleteCat)
 
     // Downloads
     app.route('/downloads')
