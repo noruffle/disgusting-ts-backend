@@ -1,33 +1,39 @@
-import { Request, Response, NextFunction } from 'express';
+import { RequestHandler } from 'express';
 import Read from './read/read.controller';
+import {manga} from '../../database/schemas/manga.schema';
 
 export default class Manga {
   public readManga: Read = new Read();
 
-  // Стартовая страница
-  public async getManga(req: Request, res: Response) {
+  public allManga: RequestHandler = async (req, res) => {
     try {
+      const show = await manga.allManga()
+
+      res.send(show)
+    } catch (err) {
+      res.send([err])
+    }
+  }
+  // Стартовая страница
+  public getByQueryManga: RequestHandler = async (req, res) => {
+    try {
+      const mangaData = await manga.findByQueryManga(req);
+
       res.render('con-manga', {
         title: process.env.TITLE,
       })
     } catch (err) {
-      res.send({
-        message: 'Error',
-        error: `${err}`
-      })
+      res.send([err])
     }
   }
 
-  public async postManga(req: Request, res: Response) {
+  public postManga: RequestHandler = async (req, res) => {
     try {
-      res.send({
-        message: "postManga request seccessful"
-      })
+      await manga.postManga(req);
+
+      res.send({ msg: "manga posted" })
     } catch (err) {
-      res.send({      
-        message: 'Error',
-        error: `${err}`
-      })
+      res.send([err])
     }
   }
 }
