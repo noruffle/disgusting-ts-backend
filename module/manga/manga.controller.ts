@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 import Read from './read/read.controller';
-import {manga} from '../../database/schemas/manga.schema';
+import {manga} from './manga.schema';
 
 export default class Manga {
   public readManga: Read = new Read();

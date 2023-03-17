@@ -1,11 +1,12 @@
 import { Application } from 'express';
 import Pathes from './path';
+import app from '../app';
 
-export default class Router {
+class Router {
 
   private path = new Pathes();
 
-  public routes(app: Application): void {
+  public routes(): void {
     
     app.route('/')
       .get(this.path.homeController.getHome)
@@ -58,3 +59,5 @@ export default class Router {
     app.use(this.path.errorsController[500])
   }
 }
+
+export default new Router().routes

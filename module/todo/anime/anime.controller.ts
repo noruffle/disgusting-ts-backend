@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import {animeSchema} from '../../database/models/anime.model';
+import {animeSchema} from './anime.model';
 import Watch from './watch/watch.controller';
 
 export default class Anime {

@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import {Cat} from '../../../database/schemas/cat.schema';
+import {Cat} from '../cat.service';
 
 class CatID {
   

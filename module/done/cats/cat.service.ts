@@ -1,31 +1,7 @@
-import {Schema, model, Document} from 'mongoose';
+import {schema} from './schema/cat.schema';
+import {ICat} from './interface/cat.interface';
 import {Request, Response} from 'express';
-import bcrypt from 'bcrypt';
-
-interface ICat extends Document {
-  name?: string;
-  email?: string;
-  password?: string;
-}
-
-const schema = new Schema<ICat>(
-  {
-    name: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-  },
-  { timestamps: true }
-)
+import {model} from 'mongoose';
 
 class ServiceOfCats {
   
@@ -61,23 +37,21 @@ class ServiceOfCats {
     const {email, password} = req.body;
     const newData = {email, password}
 
-      try {
+    try {
+      const existingCat = await this.cat.findOne({email})
         
-        const existingCat = await this.cat.findOne({email})
-          
-        if (existingCat) {
-          return res.send({ message: "Cat with this email already exist"})
-        }
-
-        const newCat = await this.cat
-          .create(newData)
-        
-        await newCat
-          .save()
-        
-      } catch (err) {
-        res.send([err])
+      if (existingCat) {
+        return res.send({ message: "Cat with this email already exist"})
       }
+      const newCat = await this.cat
+        .create(newData)
+      
+      await newCat
+        .save()
+      
+    } catch (err) {
+      res.send([err])
+    }
     const createdCat = await this.cat
       .create(newData)
 

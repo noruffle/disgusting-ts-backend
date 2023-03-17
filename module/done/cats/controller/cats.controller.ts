@@ -1,6 +1,6 @@
 import {RequestHandler} from 'express';
-import {CatById} from './catByID/cat.id.controller';
-import {Cat} from '../../database/schemas/cat.schema';
+import {CatById} from './cat.id.controller';
+import {Cat} from '../cat.service';
 
 class CatS {
   public catById = CatById;
