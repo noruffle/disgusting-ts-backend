@@ -1,30 +1,33 @@
-import { download } from './routes/route/download.route';
-import { basic } from './routes/route/basic.route';
-import { error } from './routes/route/error.route';
-import { tools } from './routes/route/tools.route';
-import { users } from './routes/route/users.route';
-import { api } from './routes/route/api.route';
-
-import { config } from "./config";
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 import express from "express";
 
-const app = express();
+import {DEFAULT} from './env.config';
 
-// Engine
-mongoose.set("strictQuery", false);
-app.set("view engine", "ejs");
+class App {
 
-// Static
-app.use(express.static(__dirname + "/public"));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+  public app: express.Application = express();
 
-// Routes
-app.use([basic, tools, api, users, download, error]);
+  constructor () {
+    
+    this.app
+    .set("view engine", "ejs")
+    .use(express.static(__dirname + "/public"))
+    .use(express.urlencoded({extended: true}))
+    .use(express.json())
+    
+    this.config
+    
+    this.app.listen(DEFAULT.PORT, DEFAULT.LISTEN)
+  }
+  
+  private async config() {
+    
+    await mongoose
+    .connect(DEFAULT.DB)
+      .then(DEFAULT.DB_LOG)
+      .catch(DEFAULT.ERR_LOG)
+      .finally(DEFAULT.ROUTER)
+  }
+}
 
-app.listen(config.port, () => {
-  console.log(
-    `\nStarted on http://localhost:${config.port}\nUse Ctrl + C to end proccess`
-  );
-});
+export default new App().app;
