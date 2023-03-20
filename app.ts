@@ -1,27 +1,35 @@
-import Database from './database/connect.db';
-import Router from './routes/route';
+import Routing from './src/route';
+import {DEFAULT} from './env.cfg';
+import mongoose from 'mongoose';
 import express from "express";
 
 class App {
 
-  public app: express.Application;
+  public app: express.Application = express();
+  public routing: Routing = new Routing();
 
   constructor () {
 
-    this.app = express();
-    this.config();
-  }
-  
-  private config (): void {
-    
     this.app
     .set("view engine", "ejs")
     .use(express.static(__dirname + "/public"))
     .use(express.urlencoded({extended: true}))
     .use(express.json())
+
+    this.db()
+
+    this.routing
+    .routes(this.app)
+  }
+
+  private async db() {
+
+    mongoose.set('strictQuery', true)
     
-    new Router().routes(this.app)
-    new Database()
+    await mongoose
+    .connect(DEFAULT.DB)
+      .then(DEFAULT.DB_LOG)
+      .catch(DEFAULT.ERR_LOG)
   }
 }
 
