@@ -5,10 +5,10 @@ import express from "express";
 
 class App {
 
-  public app: express.Application = express();
-  public routing: Routing = new Routing();
-
-  constructor () {
+  constructor (
+    public app: express.Application = express(),
+    public routing: Routing = new Routing()
+   ) {
 
     this.app
     .set("view engine", "ejs")
